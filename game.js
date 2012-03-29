@@ -82,14 +82,30 @@ window.rr.robots.red = {x: null, y: null};
 
 	function moveRobot(color, direction) {
 
-		if ($.inArray(direction, ["north", "east", "south", "west"]) === -1) {
-			console.error("Invalid direction: " + direction);
-		}
-
 		var robot = window.rr.robots[color];
 
 		if (!robot) {
 			console.error("Can't find " + color + " robot!");
+			return;
+		}
+
+		var nextX = robot.x;
+		var nextY = robot.y;
+
+		if (direction === "north") {
+			nextY--;
+		}
+		else if (direction === "east") {
+			nextX++;
+		}
+		else if (direction === "south") {
+			nextY++;
+		}
+		else if (direction === "west") {
+			nextX--;
+		}
+		else {
+			console.error("Invalid direction: " + direction);
 			return;
 		}
 
