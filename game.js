@@ -102,9 +102,10 @@ window.rr.robots = {};
 		window.rr.robots[color].y = y;
 	}
 
-	function moveRobot(color, direction) {
+	window.rr.moveRobot = function(color, direction) {
 
 		var robot = window.rr.robots[color];
+		var cell = window.rr.board[robot.y][robot.x];
 
 		if (!robot) {
 			console.error("Can't find " + color + " robot!");
@@ -115,15 +116,19 @@ window.rr.robots = {};
 		var nextY = robot.y;
 
 		if (direction === "north") {
+			if (cell.northWall) return;
 			nextY--;
 		}
 		else if (direction === "east") {
+			if (cell.eastWall) return;
 			nextX++;
 		}
 		else if (direction === "south") {
+			if (cell.southWall) return;
 			nextY++;
 		}
 		else if (direction === "west") {
+			if (cell.westWall) return;
 			nextX--;
 		}
 		else {
@@ -131,8 +136,17 @@ window.rr.robots = {};
 			return;
 		}
 
-	}
+		cell.robot = null;
+		window.rr.board[nextY][nextX].robot = color;
+		window.rr.robots[color].x = nextX;
+		window.rr.robots[color].y = nextY;
 
-	moveRobot("red", "north");
+		window.rr.draw();
+
+		window.setTimeout(function() {
+			window.rr.moveRobot(color, direction);
+		}, 500);
+
+	}
 
 })();

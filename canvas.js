@@ -1,6 +1,8 @@
 (function() {
 	
-	window.rr.draw = function(board, canvas) {
+	window.rr.draw = function() {
+		var board = window.rr.board;
+		var canvas = document.getElementById("rrcanvas");
 		var row, col,
 			size = window.rr.size,
 			scale = window.rr.scale,
