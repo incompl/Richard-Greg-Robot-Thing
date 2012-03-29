@@ -5,14 +5,16 @@
 	</head>
 	<body>
 		<canvas id="rrcanvas" width="640" height="640"></canvas>
+
 		<script src="lib/jquery-1.7.2.min.js"></script>
+		<script src="lib/keyDecode.js"></script>
+
 		<script src="game.js"></script>
 		<script src="canvas.js"></script>
 		<script>
 		(function() {
 			window.rr.scale = 38;
 			window.rr.draw();
-			window.rr.moveRobot("red", "north");
 
 			var win = $(window);
 			
@@ -24,6 +26,19 @@
 				rrcanvas.height = min;
 				window.rr.scale = min / 17;
 				window.rr.draw(window.rr.board, rrcanvas);
+			});
+
+			$(document).keydown(function(e) {
+				var key = keyDecode(e);
+				var dir;
+				if (window.rr.moving) return;
+				if (key === "up") dir = "north";
+				if (key === "right") dir = "east";
+				if (key === "down") dir = "south";
+				if (key === "left") dir = "west";
+				if (dir) {
+					window.rr.moveRobot("red", dir);
+				}
 			});
 		})();
 		</script>

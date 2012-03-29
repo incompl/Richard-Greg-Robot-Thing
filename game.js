@@ -104,6 +104,8 @@ window.rr.robots = {};
 
 	window.rr.moveRobot = function(color, direction) {
 
+		window.rr.moving = true;
+
 		var robot = window.rr.robots[color];
 		var cell = window.rr.board[robot.y][robot.x];
 
@@ -116,23 +118,27 @@ window.rr.robots = {};
 		var nextY = robot.y;
 
 		if (direction === "north") {
-			if (cell.northWall) return;
+			if (cell.northWall) window.rr.moving = false;
 			nextY--;
 		}
 		else if (direction === "east") {
-			if (cell.eastWall) return;
+			if (cell.eastWall) window.rr.moving = false;
 			nextX++;
 		}
 		else if (direction === "south") {
-			if (cell.southWall) return;
+			if (cell.southWall) window.rr.moving = false;
 			nextY++;
 		}
 		else if (direction === "west") {
-			if (cell.westWall) return;
+			if (cell.westWall) window.rr.moving = false;
 			nextX--;
 		}
 		else {
 			console.error("Invalid direction: " + direction);
+			window.rr.moving = false;
+		}
+
+		if (window.rr.moving === false) {
 			return;
 		}
 
@@ -145,7 +151,7 @@ window.rr.robots = {};
 
 		window.setTimeout(function() {
 			window.rr.moveRobot(color, direction);
-		}, 500);
+		}, 100);
 
 	}
 
