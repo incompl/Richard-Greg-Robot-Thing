@@ -138,6 +138,10 @@ window.rr.robots = {};
 			window.rr.moving = false;
 		}
 
+		if (window.rr.moving && window.rr.board[nextY][nextX].robot) {
+			window.rr.moving = false;
+		}
+
 		if (window.rr.moving === false) {
 			return;
 		}
