@@ -21,7 +21,7 @@
 				if (tile.robot) {
 					ctx.beginPath();
 					ctx.fillStyle = tile.robot;
-					ctx.arc(75, 75, 10, 0, Math.PI*2, true);
+					ctx.arc(x + scale / 2, y + scale / 2, scale / 3, 0, Math.PI*2, true);
 					ctx.closePath();
 					ctx.fill();
 				}
