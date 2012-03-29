@@ -23,7 +23,6 @@ window.rr = {};
 window.rr.board = [];
 window.rr.size = 16;
 window.rr.robots = {};
-window.rr.robots.red = {x: null, y: null};
 
 (function() {
 
@@ -32,7 +31,6 @@ window.rr.robots.red = {x: null, y: null};
 	var width = window.rr.size;
 	var height = window.rr.size;
 	var row;
-	var redPlaced = false;
 
 	for (y = 0; y < height; y++) {
 		row = [];
@@ -41,6 +39,11 @@ window.rr.robots.red = {x: null, y: null};
 			row[x] = createCell(x, y);
 		}
 	}
+
+	createRobot("red");
+	createRobot("yellow");
+	createRobot("green");
+	createRobot("blue");
 
 	console.dir(window.rr.board);
 
@@ -58,14 +61,6 @@ window.rr.robots.red = {x: null, y: null};
 			cell.southWall = true;
 		}
 
-		// red robot
-		if (!redPlaced) {
-			redPlaced = true;
-			cell.robot = "red";
-			window.rr.robots.red.x = x;
-			window.rr.robots.red.y = y;
-		}
-
 		// If there is a south wall on the cell north of us, put a north wall here
 		if (y > 0 && window.rr.board[y - 1][x].southWall) {
 			cell.northWall = true;
@@ -80,16 +75,47 @@ window.rr.robots.red = {x: null, y: null};
 
 	}
 
-	function moveRobot(color, direction) {
+	function createRobot(color) {
+		var x = Math.round(Math.random() * 15);
+		var y = Math.round(Math.random() * 15);
+		var cell = window.rr.board[y][x];
 
-		if ($.inArray(direction, ["north", "east", "south", "west"]) === -1) {
-			console.error("Invalid direction: " + direction);
+		if (cell.robot) {
+			createRobot(color);
 		}
+
+		cell.robot = color;
+		window.rr.robots[color] = {};
+		window.rr.robots[color].x = x;
+		window.rr.robots[color].y = y;
+	}
+
+	function moveRobot(color, direction) {
 
 		var robot = window.rr.robots[color];
 
 		if (!robot) {
 			console.error("Can't find " + color + " robot!");
+			return;
+		}
+
+		var nextX = robot.x;
+		var nextY = robot.y;
+
+		if (direction === "north") {
+			nextY--;
+		}
+		else if (direction === "east") {
+			nextX++;
+		}
+		else if (direction === "south") {
+			nextY++;
+		}
+		else if (direction === "west") {
+			nextX--;
+		}
+		else {
+			console.error("Invalid direction: " + direction);
 			return;
 		}
 
