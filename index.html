@@ -26,7 +26,7 @@
 				rrcanvas.height = min;
 				window.rr.scale = min / 17;
 				window.rr.draw(window.rr.board, rrcanvas);
-			});
+			}).trigger("resize");
 
 			$(document).keydown(function(e) {
 				if (!e.shiftKey && !e.ctrlKey) {
