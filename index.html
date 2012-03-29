@@ -13,6 +13,18 @@
 			var rrcanvas = document.getElementById("rrcanvas");
 			window.rr.scale = 38;
 			window.rr.draw(window.rr.board, rrcanvas);
+
+			var win = $(window);
+			
+			win.on("resize", function() {
+				var w = win.width(),
+					h = win.height(),
+					min = w < h ? w : h;
+				rrcanvas.width = min;
+				rrcanvas.height = min;
+				window.rr.scale = min / 17;
+				window.rr.draw(window.rr.board, rrcanvas);
+			});
 		})();
 		</script>
 	</body>
