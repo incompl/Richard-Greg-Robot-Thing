@@ -45,8 +45,6 @@ window.rr.robots = {};
 	createRobot("green");
 	createRobot("blue");
 
-	console.dir(window.rr.board);
-
 	function createCell(x, y) {
 
 		var cell = {};
