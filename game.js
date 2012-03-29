@@ -19,13 +19,25 @@ Shapes (for targets)
 
 */
 
-window.board = [
-  [{southWall:true}, {}, {}],
-  [{norhtWall:true}, {}, {}]
-];
+window.board = [[{}]];
 
 (function() {
 
-    alert("HI");
+	var x;
+	var y;
+	var width = 16;
+	var height = 16;
+	var row;
+	var i = 0;
+
+	for (y = 0; y < height; y++) {
+		row = [];
+		for (x = 0; x < width; x++) {
+			row[x] = {val:++i};
+		}
+		window.board[y] = row;
+	}
+
+	console.dir(window.board);
 
 })();
