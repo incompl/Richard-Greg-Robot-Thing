@@ -22,6 +22,8 @@ Shapes (for targets)
 window.rr = {};
 window.rr.board = [];
 window.rr.size = 16;
+window.rr.robots = {};
+window.rr.robots.red = {x: null, y: null};
 
 (function() {
 
@@ -30,6 +32,7 @@ window.rr.size = 16;
 	var width = window.rr.size;
 	var height = window.rr.size;
 	var row;
+	var redPlaced = false;
 
 	for (y = 0; y < height; y++) {
 		row = [];
@@ -55,6 +58,14 @@ window.rr.size = 16;
 			cell.southWall = true;
 		}
 
+		// red robot
+		if (!redPlaced) {
+			redPlaced = true;
+			cell.robot = "red";
+			window.rr.robots.red.x = x;
+			window.rr.robots.red.y = y;
+		}
+
 		// If there is a south wall on the cell north of us, put a north wall here
 		if (y > 0 && window.rr.board[y - 1][x].southWall) {
 			cell.northWall = true;
@@ -68,5 +79,22 @@ window.rr.size = 16;
 		return cell;
 
 	}
+
+	function moveRobot(color, direction) {
+
+		if ($.inArray(direction, ["north", "east", "south", "west"]) === -1) {
+			console.error("Invalid direction: " + direction);
+		}
+
+		var robot = window.rr.robots[color];
+
+		if (!robot) {
+			console.error("Can't find " + color + " robot!");
+			return;
+		}
+
+	}
+
+	moveRobot("red", "north");
 
 })();
