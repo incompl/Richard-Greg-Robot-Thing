@@ -23,6 +23,7 @@ window.rr = {};
 window.rr.board = [];
 window.rr.size = 16;
 window.rr.robots = {};
+window.rr.selected = "red";
 
 (function() {
 

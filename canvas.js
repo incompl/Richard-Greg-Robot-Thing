@@ -25,12 +25,19 @@
 				if (tile.robot) {
 					ctx.beginPath();
 					ctx.fillStyle = tile.robot;
+					ctx.strokeStyle = "black";
+					ctx.lineWidth = 3;
 					ctx.arc(x + scale / 2, y + scale / 2, scale / 3, 0, Math.PI*2, true);
 					ctx.closePath();
 					ctx.fill();
+					if (window.rr.selected === tile.robot) {
+						ctx.stroke();
+					}
 				}
 				
 				// Draw walls
+				ctx.strokeStyle = "none";
+				ctx.lineWidth = 1;
 				if (tile.northWall) {
 					ctx.fillStyle = "gray";
 					ctx.fillRect(x, y, scale, scale * .1);

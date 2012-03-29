@@ -29,7 +29,12 @@
 			});
 
 			$(document).keydown(function(e) {
+				if (!e.shiftKey && !e.ctrlKey) {
+					e.preventDefault();
+				}
 				var key = keyDecode(e);
+
+				// movement
 				var dir;
 				if (window.rr.moving) return;
 				if (key === "up") dir = "north";
@@ -37,7 +42,16 @@
 				if (key === "down") dir = "south";
 				if (key === "left") dir = "west";
 				if (dir) {
-					window.rr.moveRobot("red", dir);
+					window.rr.moveRobot(window.rr.selected, dir);
+				}
+
+				// select robot
+				if (key === "tab") {
+					if (window.rr.selected === "red") window.rr.selected = "green";
+					else if (window.rr.selected === "green") window.rr.selected = "blue";
+					else if (window.rr.selected === "blue") window.rr.selected = "yellow";
+					else if (window.rr.selected === "yellow") window.rr.selected = "red";
+					window.rr.draw();
 				}
 			});
 		})();
