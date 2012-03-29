@@ -29,7 +29,7 @@
 			}).trigger("resize");
 
 			$(document).keydown(function(e) {
-				if (!e.shiftKey && !e.ctrlKey) {
+				if (!e.shiftKey && !e.ctrlKey && !e.metaKey) {
 					e.preventDefault();
 				}
 				var key = keyDecode(e);
