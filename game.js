@@ -51,6 +51,20 @@ window.rr.robots = {};
 
 		var cell = {};
 
+		// always include walls on board boundaries
+		if (x === 0) {
+			cell.westWall = true;
+		}
+		if (x === 15) {
+			cell.eastWall = true;
+		}
+		if (y === 0) {
+			cell.northWall = true;
+		}
+		if (y === 15) {
+			cell.southWall = true;
+		}
+
 		// 25% chance of wall on east
 		if (Math.random() < .25) {
 			cell.eastWall = true;
