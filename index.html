@@ -5,7 +5,15 @@
 	</head>
 	<body>
 		Hello World
-
+		<canvas id="rrcanvas" width="640" height="640"></canvas>
 		<script src="game.js"></script>
+		<script src="canvas.js"></script>
+		<script>
+		(function() {
+			var rrcanvas = document.getElementById("rrcanvas");
+			window.rr.scale = 38;
+			window.rr.draw(window.rr.board, rrcanvas);
+		})();
+		</script>
 	</body>
 </html>
