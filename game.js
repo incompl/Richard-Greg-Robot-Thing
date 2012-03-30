@@ -28,26 +28,44 @@ window.rr.selected = "red";
 
 (function() {
 
-	var x;
-	var y;
-	var width = window.rr.size;
-	var height = window.rr.size;
-	var row;
+	$("#board1").on("click", function() {
+		alert("LOL");
+	});
 
-	for (y = 0; y < height; y++) {
-		row = [];
-		window.rr.board[y] = row;
-		for (x = 0; x < width; x++) {
-			row[x] = createCell(x, y);
+	$("#random").on("click", function() {
+		createRandomGame();
+	});
+
+	createRandomGame();
+
+	function createRandomGame() {
+
+		var x;
+		var y;
+		var width = window.rr.size;
+		var height = window.rr.size;
+		var row;
+
+		for (y = 0; y < height; y++) {
+			row = [];
+			window.rr.board[y] = row;
+			for (x = 0; x < width; x++) {
+				row[x] = createCell(x, y);
+			}
 		}
+
+		createRobot("red");
+		createRobot("yellow");
+		createRobot("green");
+		createRobot("blue");
+
+		createTarget("blue", "moon");
+
+		if (window.rr.draw) {
+			window.rr.draw();
+		}
+
 	}
-
-	createRobot("red");
-	createRobot("yellow");
-	createRobot("green");
-	createRobot("blue");
-
-	createTarget("blue", "moon");
 
 	function createCell(x, y) {
 
@@ -191,7 +209,7 @@ window.rr.selected = "red";
 
 		window.setTimeout(function() {
 			window.rr.moveRobot(color, direction);
-		}, 100);
+		}, 50);
 
 	}
 
