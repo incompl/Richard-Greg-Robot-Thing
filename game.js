@@ -6,6 +6,7 @@ All possible cell properties:
  * northWall   true
  * eastWall    true
  * westWall    true
+ * offLimits   true
  * robot       "red", "green", "yellow", "blue"
  * target      {color: "red", shape: "moon"}
 
@@ -65,14 +66,32 @@ window.rr.selected = "red";
 		if (y === 15) {
 			cell.southWall = true;
 		}
+		if (x === 7 && y === 8 ||
+			  x === 7 && y === 7 ||
+			  x === 8 && y === 8 ||
+			  x === 8 && y === 7) {
+			cell.offLimits = true;
+		}
 
 		// 25% chance of wall on east
-		if (Math.random() < .25) {
+		if (Math.random() < .1 ||
+			  x === 6 && y == 7 ||
+			  x === 6 && y == 8 ||
+			  x === 7 && y == 7 ||
+			  x === 7 && y == 8 ||
+			  x === 8 && y == 7 ||
+			  x === 8 && y == 8) {
 			cell.eastWall = true;
 		}
 
 		// 25% chance of wall on south
-		if (Math.random() < .25) {
+		if (Math.random() < .1 ||
+			  x === 7 && y == 6 ||
+			  x === 8 && y == 6 ||
+			  x === 7 && y == 7 ||
+			  x === 8 && y == 7 ||
+			  x === 7 && y == 8 ||
+			  x === 8 && y == 8) {
 			cell.southWall = true;
 		}
 

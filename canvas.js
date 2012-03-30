@@ -16,7 +16,12 @@
 				var y = (row + 0.5) * scale;
 				
 				// Draw tile floor
-				ctx.fillStyle = "silver";
+				if (tile.offLimits) {
+					ctx.fillStyle = "gray";
+				}
+				else {
+					ctx.fillStyle = "silver";
+				}
 				ctx.strokeStyle = "rgb(220, 220, 220)";
 				ctx.fillRect(x + scale * .1, y + scale * .1, scale * .8, scale * .8);
 				ctx.strokeRect(x, y, scale, scale);
