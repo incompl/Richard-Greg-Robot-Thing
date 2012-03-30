@@ -46,6 +46,8 @@ window.rr.selected = "red";
 	createRobot("green");
 	createRobot("blue");
 
+	createTarget("blue", "moon");
+
 	function createCell(x, y) {
 
 		var cell = {};
@@ -101,6 +103,20 @@ window.rr.selected = "red";
 		window.rr.robots[color] = {};
 		window.rr.robots[color].x = x;
 		window.rr.robots[color].y = y;
+	}
+
+	function createTarget(color, shape) {
+		var x = Math.round(Math.random() * 15);
+		var y = Math.round(Math.random() * 15);
+		var cell = window.rr.board[y][x];
+
+		if (cell.target) {
+			CreateTarget(color, shape);
+		}
+
+		cell.target = {};
+		cell.target.color = color;
+		cell.target.shape = shape;
 	}
 
 	window.rr.moveRobot = function(color, direction) {

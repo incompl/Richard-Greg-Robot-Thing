@@ -34,6 +34,18 @@
 						ctx.stroke();
 					}
 				}
+
+				// Draw targets
+				if (tile.target) {
+					ctx.beginPath();
+					ctx.fillStyle = "silver";
+					ctx.strokeStyle = tile.target.color;
+					ctx.lineWidth = 2;
+					ctx.arc(x + scale / 2, y + scale / 2, scale / 3, 0, Math.PI*2, true);
+					ctx.closePath();
+					ctx.fill();
+					ctx.stroke();
+				}
 				
 				// Draw walls
 				ctx.strokeStyle = "none";
